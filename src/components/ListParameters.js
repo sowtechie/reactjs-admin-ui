@@ -8,10 +8,10 @@ export default class Namespaces extends React.Component {
   render() {
     return (
       <div className="content-wrapper">
-        {/* <h2 className="header">
+        <h2 className="header">
           Http Parameters
                 </h2>
-        <hr></hr> */}
+        <hr></hr>
         <div>
           <MaterialTableDemo />
         </div>
