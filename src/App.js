@@ -153,7 +153,7 @@ export default function App() {
             [classes.contentShift]: open,
           })}
         >
-          <Redirect exact={true} from="/" to="/parameters" />
+          <Redirect exact={true} from="/" to="/namespaces" />
           <Route exact path="/namespaces">
             <Namespaces />
           </Route>

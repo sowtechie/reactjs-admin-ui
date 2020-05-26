@@ -26,8 +26,9 @@ export default class HttpParameters extends React.Component {
     };
     this.handleFormChange = this.handleFormChange.bind(this);
     this.createNewParam = this.createNewParam.bind(this);
-
-    localStorage.setItem('httpParameterNames', JSON.stringify(httpParameters));
+    if (!localStorage.getItem('httpParameters')) {
+      localStorage.setItem('httpParameters', JSON.stringify(httpParameters));
+    }
   }
 
   // updateMessage() {
@@ -51,21 +52,32 @@ export default class HttpParameters extends React.Component {
     newHttpParameterObject['namespace'] = this.state.namespace;
     newHttpParameterObject['key'] = this.state.key;
 
-    localStorage.setItem('newHttpName', JSON.stringify(newHttpParameterObject));
+    let savedParams = localStorage.getItem('httpParameters') || [];
+    if (savedParams) {
+      savedParams = JSON.parse(savedParams);
+    } else {
+      savedParams = httpParameters;
+    }
+    savedParams.push(newHttpParameterObject);
+    localStorage.setItem('httpParameters', JSON.stringify(savedParams));
     this.state.message = 'Saved successfully';
     const source = timer(5000);
-    //output: 0
     const subscribe = source.subscribe(val => this.state.message = '');
-
-
   }
 
   render() {
-    var DataKeys = httpParameters.map(h => h.key),
+    let savedParams = localStorage.getItem('httpParameters') || [];
+    if (savedParams) {
+      savedParams = JSON.parse(savedParams);
+    } else {
+      savedParams = httpParameters;
+    }
+
+    var DataKeys = savedParams.map(h => h.key),
       DataKeyOptions = function (X) {
         return <option value={X}>{X}</option>;
       };
-    var DataNamespaces = httpParameters.map(h => h.namespace),
+    var DataNamespaces = savedParams.map(h => h.namespace),
       DataNamespaceOptions = function (X) {
         return <option value={X}>{X}</option>;
       };

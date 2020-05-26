@@ -21,6 +21,12 @@ export default class Namespaces extends React.Component {
 }
 
 export function MaterialTableDemo() {
+  let savedHttpParameters = localStorage.getItem('httpParameters');
+  if (savedHttpParameters) {
+    savedHttpParameters = JSON.parse(savedHttpParameters);
+  } else {
+    savedHttpParameters = httpParameters;
+  }
   const [state, setState] = React.useState({
     columns: [
       { title: 'Key', field: 'key' },
@@ -29,7 +35,7 @@ export function MaterialTableDemo() {
       { title: 'Type', field: 'type' },
       { title: 'Namespace', field: 'namespace' },
     ],
-    data: httpParameters
+    data: savedHttpParameters
   });
 
   return (
@@ -37,43 +43,46 @@ export function MaterialTableDemo() {
       title="Http Parameters"
       columns={state.columns}
       data={state.data}
-      // editable={{
-      //   onRowAdd: (newData) =>
-      //     new Promise((resolve) => {
-      //       setTimeout(() => {
-      //         resolve();
-      //         setState((prevState) => {
-      //           const data = [...prevState.data];
-      //           data.push(newData);
-      //           return { ...prevState, data };
-      //         });
-      //       }, 600);
-      //     }),
-      //   onRowUpdate: (newData, oldData) =>
-      //     new Promise((resolve) => {
-      //       setTimeout(() => {
-      //         resolve();
-      //         if (oldData) {
-      //           setState((prevState) => {
-      //             const data = [...prevState.data];
-      //             data[data.indexOf(oldData)] = newData;
-      //             return { ...prevState, data };
-      //           });
-      //         }
-      //       }, 600);
-      //     }),
-      //   onRowDelete: (oldData) =>
-      //     new Promise((resolve) => {
-      //       setTimeout(() => {
-      //         resolve();
-      //         setState((prevState) => {
-      //           const data = [...prevState.data];
-      //           data.splice(data.indexOf(oldData), 1);
-      //           return { ...prevState, data };
-      //         });
-      //       }, 600);
-      //     }),
-      // }}
+      editable={{
+        onRowAdd: (newData) =>
+          new Promise((resolve) => {
+            setTimeout(() => {
+              resolve();
+              setState((prevState) => {
+                const data = [...prevState.data];
+                data.push(newData);
+                localStorage.setItem('httpParameters', JSON.stringify(data))
+                return { ...prevState, data };
+              });
+            }, 600);
+          }),
+        onRowUpdate: (newData, oldData) =>
+          new Promise((resolve) => {
+            setTimeout(() => {
+              resolve();
+              if (oldData) {
+                setState((prevState) => {
+                  const data = [...prevState.data];
+                  data[data.indexOf(oldData)] = newData;
+                  localStorage.setItem('httpParameters', JSON.stringify(data))
+                  return { ...prevState, data };
+                });
+              }
+            }, 600);
+          }),
+        onRowDelete: (oldData) =>
+          new Promise((resolve) => {
+            setTimeout(() => {
+              resolve();
+              setState((prevState) => {
+                const data = [...prevState.data];
+                data.splice(data.indexOf(oldData), 1);
+                localStorage.setItem('httpParameters', JSON.stringify(data))
+                return { ...prevState, data };
+              });
+            }, 600);
+          }),
+      }}
     />
   );
 }

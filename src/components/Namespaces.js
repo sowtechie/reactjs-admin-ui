@@ -1,34 +1,10 @@
 import React, { forwardRef } from "react";
 import "./Namespaces.scss";
 import MaterialTable, { Column } from 'material-table';
+import httpParameters from '../data/namespaces.json'
 
 export default class Namespaces extends React.Component {
-
     render() {
-        const httpParameters = [
-            {
-                "key": "http",
-                "displayName": "Accept Ranges in bytes/kilobytes",
-                "Type": "Header",
-                "HttpParameterName": "Accept-Ranges",
-                "namespace": "HTTP"
-            },
-            {
-                "key": "verizon-billing",
-                "displayName": "Verizon Billing",
-                "Type": "cookie",
-                "HttpParameterName": "cache-control",
-                "namespace": "generic"
-            },
-            {
-                "key": "edgecast",
-                "displayName": "Edgecast",
-                "Type": "cookie",
-                "HttpParameterName": "edgecast",
-                "namespace": "generic"
-            }
-        ];
-
         return (
             <div className="content-wrapper">
                 <h2 className="header">
@@ -44,34 +20,18 @@ export default class Namespaces extends React.Component {
 }
 
 export function MaterialTableDemo() {
+  let savedHttpParameters = localStorage.getItem('httpParameters');
+  if (savedHttpParameters) {
+    savedHttpParameters = JSON.parse(savedHttpParameters);
+  } else {
+    savedHttpParameters = httpParameters;
+  }
   const [state, setState] = React.useState({
     columns: [
       { title: 'Key', field: 'key' },
       { title: 'Namespace', field: 'displayName' },
     ],
-    data: [
-      {
-          "key": "http",
-          "displayName": "Accept Ranges in bytes/kilobytes",
-          "Type": "Header",
-          "HttpParameterName": "Accept-Ranges",
-          "namespace": "HTTP"
-      },
-      {
-          "key": "verizon-billing",
-          "displayName": "Verizon Billing",
-          "Type": "cookie",
-          "HttpParameterName": "cache-control",
-          "namespace": "generic"
-      },
-      {
-          "key": "edgecast",
-          "displayName": "Edgecast",
-          "Type": "cookie",
-          "HttpParameterName": "edgecast",
-          "namespace": "generic"
-      }
-  ]
+    data: savedHttpParameters
   });
 
   return (
@@ -87,6 +47,7 @@ export function MaterialTableDemo() {
               setState((prevState) => {
                 const data = [...prevState.data];
                 data.push(newData);
+                localStorage.setItem('httpParameters', JSON.stringify(data))
                 return { ...prevState, data };
               });
             }, 600);
@@ -99,6 +60,7 @@ export function MaterialTableDemo() {
                 setState((prevState) => {
                   const data = [...prevState.data];
                   data[data.indexOf(oldData)] = newData;
+                  localStorage.setItem('httpParameters', JSON.stringify(data))
                   return { ...prevState, data };
                 });
               }
@@ -111,6 +73,7 @@ export function MaterialTableDemo() {
               setState((prevState) => {
                 const data = [...prevState.data];
                 data.splice(data.indexOf(oldData), 1);
+                localStorage.setItem('httpParameters', JSON.stringify(data))
                 return { ...prevState, data };
               });
             }, 600);
