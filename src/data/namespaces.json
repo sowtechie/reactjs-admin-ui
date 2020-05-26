@@ -1,0 +1,23 @@
+[
+    {
+        "key": "http",
+        "displayName": "Accept Ranges in bytes/kilobytes",
+        "type": "Header",
+        "httpParameterName": "Accept-Ranges",
+        "namespace": "HTTP"
+    },
+    {
+        "key": "verizon-billing",
+        "displayName": "Verizon Billing",
+        "type": "cookie",
+        "httpParameterName": "cache-control",
+        "namespace": "verizon"
+    },
+    {
+        "key": "edgecast",
+        "displayName": "Edgecast",
+        "type": "cookie",
+        "httpParameterName": "edgecast",
+        "namespace": "edgecast"
+    }
+]

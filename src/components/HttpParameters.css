@@ -1,0 +1,27 @@
+/* @import '../App.scss'; */
+
+.namespace-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.table-header {
+    margin-bottom: 12px;
+}
+
+.table-data {
+    text-align: left;
+}
+
+.label-class {
+    width: 100px;
+}
+
+.form-field {
+    padding: 8px;
+}
+
+.submit-button {
+    float: right;
+}
