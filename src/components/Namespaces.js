@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import "./Namespaces.scss";
 import MaterialTable, { Column } from 'material-table';
-import httpParameters from '../data/namespaces.json'
+import namespaces from '../data/namespaces.json'
 
 export default class Namespaces extends React.Component {
     render() {
@@ -20,23 +20,23 @@ export default class Namespaces extends React.Component {
 }
 
 export function MaterialTableDemo() {
-  let savedHttpParameters = localStorage.getItem('httpParameters');
-  if (savedHttpParameters) {
-    savedHttpParameters = JSON.parse(savedHttpParameters);
+  let savedNamespaces = localStorage.getItem('namespaces');
+  if (savedNamespaces) {
+    savedNamespaces = JSON.parse(savedNamespaces);
   } else {
-    savedHttpParameters = httpParameters;
+    savedNamespaces = namespaces;
   }
   const [state, setState] = React.useState({
     columns: [
       { title: 'Key', field: 'key' },
-      { title: 'Namespace', field: 'displayName' },
+      { title: 'Namespace', field: 'namespace' },
     ],
-    data: savedHttpParameters
+    data: savedNamespaces
   });
 
   return (
     <MaterialTable
-      title="Editable Example"
+      title="Namespaces"
       columns={state.columns}
       data={state.data}
       editable={{
@@ -47,7 +47,7 @@ export function MaterialTableDemo() {
               setState((prevState) => {
                 const data = [...prevState.data];
                 data.push(newData);
-                localStorage.setItem('httpParameters', JSON.stringify(data))
+                localStorage.setItem('namespaces', JSON.stringify(data))
                 return { ...prevState, data };
               });
             }, 600);
@@ -60,7 +60,7 @@ export function MaterialTableDemo() {
                 setState((prevState) => {
                   const data = [...prevState.data];
                   data[data.indexOf(oldData)] = newData;
-                  localStorage.setItem('httpParameters', JSON.stringify(data))
+                  localStorage.setItem('namespaces', JSON.stringify(data))
                   return { ...prevState, data };
                 });
               }
@@ -73,7 +73,7 @@ export function MaterialTableDemo() {
               setState((prevState) => {
                 const data = [...prevState.data];
                 data.splice(data.indexOf(oldData), 1);
-                localStorage.setItem('httpParameters', JSON.stringify(data))
+                localStorage.setItem('namespaces', JSON.stringify(data))
                 return { ...prevState, data };
               });
             }, 600);

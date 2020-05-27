@@ -138,7 +138,7 @@ export default function App() {
           </div>
           <Divider />
           <List>
-            {[{ title: 'Namespaces', link: 'namespaces' }, { title: 'Http Parameters', link: 'parameters' }, { title: 'List Parameters', link: 'listParameters' }].map((navObj, index) => (
+            {[{ title: 'Namespaces', link: 'namespaces' },{ title: 'List Parameters', link: 'listParameters' }].map((navObj, index) => (
               <Link style={{ textDecoration: 'none' }} to={navObj.link}>  <ListItem button key={navObj.title}>
                 {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
                 <ListItemText primary={navObj.title} />
@@ -156,9 +156,6 @@ export default function App() {
           <Redirect exact={true} from="/" to="/namespaces" />
           <Route exact path="/namespaces">
             <Namespaces />
-          </Route>
-          <Route exact path="/parameters">
-            <HttpParameters />
           </Route>
           <Route exact path="/listParameters">
             <ListParameters />
