@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme, createStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -13,19 +13,15 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import { BrowserRouter, Router, Route, Link, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
 
-import HttpParameters from './components/HttpParameters'
 import Namespaces from './components/Namespaces'
 import ListParameters from './components/ListParameters'
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       display: 'flex',
@@ -138,7 +134,7 @@ export default function App() {
           </div>
           <Divider />
           <List>
-            {[{ title: 'Namespaces', link: 'namespaces' },{ title: 'List Parameters', link: 'listParameters' }].map((navObj, index) => (
+            {[{ title: 'Namespaces', link: 'namespaces' },{ title: 'List Parameters', link: 'listParameters' }].map((navObj) => (
               <Link style={{ textDecoration: 'none' }} to={navObj.link}>  <ListItem button key={navObj.title}>
                 {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
                 <ListItemText primary={navObj.title} />
