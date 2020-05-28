@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import "./Namespaces.scss";
+import "./Namespaces.css";
 import MaterialTable, { Column } from 'material-table';
 import namespaces from '../data/namespaces.json'
 import httpParameters from '../data/httpParameters.json'

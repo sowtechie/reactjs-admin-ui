@@ -36,3 +36,37 @@
     transform: rotate(360deg);
   }
 }
+
+$app-padding: 36px;
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-evenly;
+}
+
+.mobile-only {
+  display: block;
+
+  @media screen and (min-width: $breakpoint_xs) {
+    display: none;
+  }
+}
+.desktop-only {
+  display: none;
+
+  @media screen and (min-width: $breakpoint_xs) {
+    display: block;
+  }
+}
+
+.w-100 {
+  width: 100%;
+  
+}
+
+.header {
+  padding: 12px;
+  background-color: lightgrey;
+}
